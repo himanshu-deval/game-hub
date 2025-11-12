@@ -17,12 +17,21 @@ export interface Game {
 
 const useGames = (
   selectedGenre: Genre | null,
-  selectedPlatform: Platform | null
+  selectedPlatform: Platform | null,
+  searchText: string,
+  sortOrder: string
 ) =>
   useData<Game>(
     "/games",
-    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } },
-    [selectedGenre?.id, selectedPlatform?.id]
+    {
+      params: {
+        genres: selectedGenre?.id,
+        platforms: selectedPlatform?.id,
+        search: searchText,
+        ordering: sortOrder,
+      },
+    },
+    [selectedGenre?.id, selectedPlatform?.id, searchText, sortOrder]
   );
 
 export default useGames;
